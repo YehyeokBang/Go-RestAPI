@@ -1,6 +1,8 @@
 package types
 
-// auth
+/*
+auth
+*/
 type RequestLogin struct {
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
@@ -21,7 +23,9 @@ type RequestUpdateUser struct {
 	Email    string `json:"email"`
 }
 
-// post
+/*
+post
+*/
 type RequestCreatePost struct {
 	Title   string `json:"title" binding:"required"`
 	Content string `json:"content" binding:"required"`
