@@ -6,6 +6,7 @@ import (
 	"example/board/models"
 	"example/board/models/repositories"
 	"example/board/services"
+	"fmt"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +21,7 @@ func main() {
 	loadErr := godotenv.Load(".env")
 
 	if loadErr != nil {
-		panic(loadErr)
+		fmt.Println("No .env file found")
 	}
 
 	secret := os.Getenv("JWT_SECRET")
@@ -61,7 +62,11 @@ func main() {
 		secureAPI.DELETE("/posts/:id", postController.DeletePost)
 	}
 
-	err := r.Run()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	err := r.Run(":" + port)
 	if err != nil {
 		return
 	}
